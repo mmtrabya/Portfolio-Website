@@ -41,7 +41,7 @@ const experiences = [
   },
   {
     title: 'Mobile App Development Graduate',
-    company: 'DEPI',
+    company: 'Digital Egypt Pioneers Initiative (DEPI)',
     period: '03/2024 - 12/2024',
     description: 'Specialized training in mobile application development.'
   },
@@ -59,20 +59,20 @@ const experiences = [
   },
   {
     title: 'Embedded Automotive Intern',
-    company: 'Automotive Industry',
+    company: 'Siemens & Eitsal NGO',
     period: '10/2023 - 12/2023',
     description: 'Specialized internship in automotive embedded systems.'
   },
   {
     title: 'AI & IoT Intern',
-    company: 'Tech Industry',
+    company: 'National Telecommunications Institute (NTI)',
     period: '01/2023 - 03/2023',
     description: 'Worked on artificial intelligence and Internet of Things projects.'
   },
   {
     title: 'Founder',
     company: 'Octware',
-    period: '01/2022',
+    period: '01/2022 - Present',
     description: 'Founded and established Octware.'
   }
 ];
