@@ -4,7 +4,7 @@ import { Hero } from './components/Hero/Hero';
 import { Skills } from './components/Skills/Skills';
 import { Projects } from './components/Projects/Projects';
 import { Experience } from './components/Experience/Experience';
-/* import { Testimonials } from './components/Testimonials/Testimonials'; */
+import { Testimonials } from './components/Testimonials/Testimonials';
 import { Contact } from './components/Contact';
 import './styles/animations.css';
 import { Copyrights } from './components/copyright';
@@ -19,7 +19,7 @@ function App() {
       <Skills />
       <Projects />
       <Experience />
-      {/* <Testimonials /> */}
+      <Testimonials />
       <Contact />
       <Copyrights />
     </div>

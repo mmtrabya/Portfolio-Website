@@ -2,12 +2,11 @@ import React from 'react';
 
 export const HeroImage = () => {
   return (
-    <div className="relative w-150 h-150 md:w-[650px] md:h-[650px]">
+    <div className="relative w-full h-auto md:w-[450px] md:h-auto">
       <img
-        src="https://mmtrabya.github.io/Portoflio-Website/67c26305-e25f-4265-b390-a8f550c72952.png
-"  // Referencing directly from public folder (no 'public' in the path)
+        src="https://mmtrabya.github.io/Portoflio-Website/67c26305-e25f-4265-b390-a8f550c72952.png"
         alt="Profile"
-        className="w-full h-full object-contain"
+        className="w-full h-auto object-contain"  // Keep object-contain to avoid cropping
       />
     </div>
   );
