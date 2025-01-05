@@ -14,13 +14,18 @@ export const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Prevent body scroll when the mobile menu is open
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+  }, [isOpen]);
+
   const navLinks = [
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
     { href: '#projects', label: 'Projects' },
-    { href: '#experience', label: 'Experience'},
+    { href: '#experience', label: 'Experience' },
     { href: '#testimonials', label: 'Testimonials' },
-    { href: '#contact', label: 'Contact' }
+    { href: '#contact', label: 'Contact' },
   ];
 
   return (
@@ -31,10 +36,12 @@ export const Navigation = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
+          {/* Logo */}
           <a href="#" className="text-white font-bold text-xl">
             Mohammed Tarabay
           </a>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
               <a
@@ -47,22 +54,26 @@ export const Navigation = () => {
             ))}
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-white"
             onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-label={isOpen ? 'Close menu' : 'Open menu'}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
+        {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="md:hidden fixed inset-0 bg-black bg-opacity-90 z-50">
+            <div className="flex flex-col items-center justify-center h-full space-y-6">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="block px-3 py-2 text-white hover:bg-green-600 rounded-md"
+                  className="text-white text-lg hover:text-green-500 transition-colors duration-200"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}

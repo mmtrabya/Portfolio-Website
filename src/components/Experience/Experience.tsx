@@ -36,7 +36,7 @@ const experiences = [
   {
     title: 'PR/FR Director',
     company: 'Hult Prize Mansoura University Campus',
-    period: '11/2024',
+    period: '11/2024 - present',
     description: 'Managing public and foreign relations for Hult Prize events.'
   },
   {
