@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, MouseEvent } from 'react';
 import { Menu, X } from 'lucide-react';
 
 export const Navigation = () => {
@@ -15,9 +15,20 @@ export const Navigation = () => {
   }, []);
 
   useEffect(() => {
-    // Prevent body scroll when the mobile menu is open
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [isOpen]);
+
+  const handleLinkClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
+    const targetElement = document.querySelector(href);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+      setIsOpen(false);
+    }
+  };
 
   const navLinks = [
     { href: '#about', label: 'About' },
@@ -36,25 +47,23 @@ export const Navigation = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <a href="#" className="text-white font-bold text-xl">
             Mohammed Tarabay
           </a>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 className="text-white hover:text-green-500 transition-colors duration-200"
+                onClick={(event) => handleLinkClick(event, link.href)}
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden text-white"
             onClick={() => setIsOpen(!isOpen)}
@@ -65,7 +74,6 @@ export const Navigation = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden fixed inset-0 bg-black bg-opacity-90 z-50">
             <div className="flex flex-col items-center justify-center h-full space-y-6">
@@ -74,7 +82,7 @@ export const Navigation = () => {
                   key={link.href}
                   href={link.href}
                   className="text-white text-lg hover:text-green-500 transition-colors duration-200"
-                  onClick={() => setIsOpen(false)}
+                  onClick={(event) => handleLinkClick(event, link.href)}
                 >
                   {link.label}
                 </a>
