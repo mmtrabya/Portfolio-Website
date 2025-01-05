@@ -4,7 +4,8 @@ import { SocialLinks } from '../shared/SocialLinks';
 
 export const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center bg-black text-white py-0 border-b-[20px] border-green-500">
+    <section className="pt-[80px] min-h-screen flex items-center bg-black text-white py-0 border-b-[20px] border-green-500">
+      {/* Added pt-[80px] to prevent overlapping with navbar */}
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="md:w-1/2 text-center md:text-left">
