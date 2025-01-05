@@ -18,14 +18,38 @@ export const Navigation = () => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [isOpen]);
 
+  // Custom function to handle smooth scrolling with controlled speed
+  const smoothScroll = (target: HTMLElement, duration: number) => {
+    const start = window.pageYOffset;
+    const end = target.offsetTop;
+    const distance = end - start;
+    let startTime: number | null = null;
+
+    const scroll = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = easeInOutCubic(timeElapsed, start, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) {
+        requestAnimationFrame(scroll);
+      }
+    };
+
+    const easeInOutCubic = (t: number, b: number, c: number, d: number) => {
+      const time = t / (d / 2);
+      if (time < 1) return (c / 2) * time * time * time + b;
+      const timeAdjusted = time - 2;
+      return (c / 2) * (timeAdjusted * timeAdjusted * timeAdjusted + 2) + b;
+    };
+
+    requestAnimationFrame(scroll);
+  };
+
   const handleLinkClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault();
-    const targetElement = document.querySelector(href);
+    const targetElement = document.querySelector(href) as HTMLElement;
     if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+      smoothScroll(targetElement, 1000); // Duration in ms (1000ms = 1 second)
       setIsOpen(false);
     }
   };
