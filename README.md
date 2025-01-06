@@ -5,7 +5,7 @@
 
 # 🌐 Portfolio Website
 
-Welcome to my **portfolio website**! 🚀 This site showcases my work, skills, and projects as an **Artificial Intelligence (AI) Engineer**. Feel free to explore and learn more about my expertise. ���[...]
+Welcome to my **portfolio website**! 🚀 This site showcases my work, skills, and projects as an **Artificial Intelligence (AI) Engineer**. Feel free to explore and learn more about my expertise. [...]
 
 ## 🔗 Visit My Portfolio
 
