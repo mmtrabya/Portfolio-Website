@@ -16,11 +16,11 @@ You can explore my portfolio here:
 ## 🚀 Features
 
 - **👨‍💻 About Me**: Learn more about my background, expertise, and passion for AI.
-- **Education (Coming Soon 😶‍🌫️) : Explore my Educational Background.
+- **Education *(Coming Soon 😶‍🌫️)* ** : Explore my Educational Background.
 - **⚙️ Skills**: See a list of the technologies and tools I work with.
 - **💡 Projects**: Explore some of the exciting AI-driven projects I’ve worked on.
 - **📝 Experience**: Check out my professional experience and contributions in AI and technology.
-- **🏅Certificates & Achievements (Coming Soon 😶‍🌫️)**: Check out My Certificates and Achievements in AI and Its Integration.
+- **🏅Certificates & Achievements *(Coming Soon 😶‍🌫️)* **: Check out My Certificates and Achievements in AI and Its Integration.
 - **📣 Testimonials**: Read feedback from colleagues and mentors.
 
 ## 🛠️ Technologies Used
