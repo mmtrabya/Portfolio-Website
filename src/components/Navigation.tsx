@@ -34,7 +34,7 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <a href="#" className="text-white font-bold text-xl">
-            Portfolio
+            Mohammed Tarabay
           </a>
 
           {/* Desktop navigation links */}
