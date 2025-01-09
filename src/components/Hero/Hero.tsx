@@ -69,7 +69,7 @@ export const Hero = () => {
               <SocialLinks className="justify-center md:justify-start" />
             </div>
           </div>
-          <div className="md:w-1/2 flex justify-center mt-[170px]">
+          <div className="md:w-1/2 flex justify-center mt-10 md:mt-0">
             <HeroImage />
           </div>
         </div>
