@@ -17,6 +17,11 @@ const testimonials = [
     text: "Mohammed has helped us at Startup grind building our community, organized our team and Circles properly as the people & culture director and Team Manager. He is a great leader and high-value person helping the members and directors connect better and understand each other.",
     author: "Alaa Fawzy",
     role: "Video editor, Media director @Startup Grind Mansoura Chapter",
+  },
+  {
+    text: "You have shown remarkable dedication and effort in your studies, it’s truly inspiring. I'm really proud of your progress, You're improving every day. You have such a creative mind! Your ideas are always so unique. You contribute so much to class discussions and Your input is always valuable. I appreciate how actively you participate, as It makes the class more engaging. Your collaboration skills are outstanding, You make group work so much easier. You never give up, even when things get tough. That’s a fantastic quality. You handle challenges with such a positive attitude. Keep going. Wishing you a thriving career and endless opportunities for growth. May you achieve all your goals and continue to excel in your field.",
+    author: "Hager Hamdy",
+    role: "Teaching Assistant, Embedded Systems Engineer",
   }
 ];
 

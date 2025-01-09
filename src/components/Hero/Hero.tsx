@@ -16,7 +16,7 @@ export const Hero = () => {
               Artificial Intelligence Engineer
             </h2>
             <p className="text-lg mb-8 text-gray-300">
-              Crafting intelligent solutions through code and innovation
+              Crafting Intelligent Solutions through Code and Innovation
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <SocialLinks className="justify-center md:justify-start" />
