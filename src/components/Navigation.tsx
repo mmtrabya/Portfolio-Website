@@ -21,7 +21,6 @@ export const Navigation = () => {
     { href: '#experience', label: 'Experience' },
     { href: '#projects', label: 'Projects' },
     { href: '#certificates', label: 'Certificates' },
-/*     { href: '#achievements', label: 'Achievements' }, */
     { href: '#testimonials', label: 'Testimonials' },
     { href: '#contact', label: 'Contact' }
   ];
@@ -38,6 +37,7 @@ export const Navigation = () => {
             Portfolio
           </a>
 
+          {/* Desktop navigation links */}
           <div className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
               <a
@@ -50,6 +50,7 @@ export const Navigation = () => {
             ))}
           </div>
 
+          {/* Mobile toggle button */}
           <button
             className="md:hidden text-white"
             onClick={() => setIsOpen(!isOpen)}
@@ -58,22 +59,34 @@ export const Navigation = () => {
           </button>
         </div>
 
-        {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="block px-3 py-2 text-white hover:bg-green-600 rounded-md"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
+        {/* Mobile menu */}
+        <div
+          className={`md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 transform ${
+            isOpen ? 'translate-x-0' : 'translate-x-full'
+          } transition-transform duration-300 ease-in-out`}
+        >
+          <div className="flex justify-end p-4">
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-white"
+            >
+              <X size={24} />
+            </button>
           </div>
-        )}
+
+          <div className="flex flex-col items-center space-y-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-white text-2xl hover:bg-green-600 rounded-md px-4 py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </nav>
   );
