@@ -10,10 +10,14 @@ export const Hero = () => {
 
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const fontSize = 10;
-    const columns = canvas.width / fontSize;
-    const drops: number[] = [];
+    
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
 
-    for (let i = 0; i < columns; i++) drops[i] = 0;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops: number[] = Array(columns).fill(0);
 
     const matrixEffect = () => {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
@@ -30,11 +34,6 @@ export const Hero = () => {
 
         drops[i]++;
       }
-    };
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
     };
 
     resizeCanvas();
