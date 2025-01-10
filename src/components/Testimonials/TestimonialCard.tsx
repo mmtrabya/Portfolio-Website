@@ -11,7 +11,7 @@ interface TestimonialCardProps {
 export const TestimonialCard = ({ text, author, role }: TestimonialCardProps) => {
   return (
     <div
-      className="bg-gray-900 p-8 rounded-lg relative shadow-md hover:shadow-lg transition-shadow duration-300 w-[735px] h-[300px]"
+      className="bg-gray-900 p-8 rounded-lg relative shadow-md hover:shadow-lg transition-shadow duration-300 w-full max-w-[735px] h-auto md:h-[300px]"
     >
       {/* Quote Icon in the Bottom Right */}
       <Quote
@@ -20,7 +20,7 @@ export const TestimonialCard = ({ text, author, role }: TestimonialCardProps) =>
       />
 
       {/* Testimonial Text */}
-      <div className="relative z-10 h-[160px] overflow-y-auto scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-700">
+      <div className="relative z-10 h-[160px] md:h-[160px] overflow-y-auto scrollbar-thin scrollbar-thumb-green-500 scrollbar-track-gray-700">
         <p className="text-gray-300 italic text-lg leading-relaxed">“{text}”</p>
       </div>
 
