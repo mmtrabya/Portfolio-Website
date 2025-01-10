@@ -15,8 +15,8 @@ export const TestimonialCard = ({ text, author, role }: TestimonialCardProps) =>
     >
       {/* Quote Icon in the Bottom Right */}
       <Quote
-        className="absolute bottom-6 right-6 text-green-600 opacity-20"
-        size={50}
+        className="absolute bottom-4 right-4 text-green-600 opacity-20 md:opacity-50"
+        size={40}
       />
 
       {/* Testimonial Text */}
@@ -25,7 +25,7 @@ export const TestimonialCard = ({ text, author, role }: TestimonialCardProps) =>
       </div>
 
       {/* Author and Role */}
-      <div className="flex items-center gap-4 mt-6">
+      <div className="flex items-center gap-4 mt-6 md:mt-8">
         <div>
           <p className="text-green-500 font-semibold text-lg">{author}</p>
           <p className="text-white text-sm italic">{role}</p>
