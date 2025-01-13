@@ -27,6 +27,11 @@ const testimonials = [
     text: "I had the pleasure of working with Mohammed Tarabay during my second graduation project (Nixbot), where his dedication and technical skills in ROS2 and Ubuntu were truly remarkable. He worked with us during a stressful and challenging period, consistently going above and beyond to support the team. Despite the pressure, he helped us achieve a lot in a short amount of time, sharing his knowledge and tackling complex challenges with enthusiasm. His contributions were instrumental in helping us navigate areas we were unfamiliar with, and his commitment to the project’s success was evident throughout. I would highly recommend Mohammed for his passion, hard work, and technical expertise.",
     author: "Rouida Elmorshidy",
     role: "Biomedical Engineer",
+  },
+  {
+    text: "Tarabay is truly exceptional. His professionalism, dedication, and expertise consistently exceed expectations. Whether he's tackling complex challenges or offering thoughtful insights, Tarabay has a remarkable ability to deliver results with both precision and creativity. What stands out most about Tarabay is his genuine passion for problem-solving, which inspires everyone around him. Working with Tarabay is not just a pleasure but a privilege, as He brings out the best in every team he joins. I wholeheartedly recommend Tarabay to anyone seeking visionary leader, a dependable collaborator, and an innovative thinker. He makes a difference truly in every project and relationship.",
+    author: "Mostafa Nasser",
+    role: "Mechanical Engineer, Startup Grind Mansoura Chapter Director",
   }
 ];
 
