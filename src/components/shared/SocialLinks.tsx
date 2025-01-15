@@ -25,7 +25,7 @@ export const SocialLinks = ({ className = '' }: SocialLinksProps) => {
         <Linkedin size={24} />
       </a>
       <a
-        href="mailto:mohammedtarabay25@outlook.com.com"
+        href="mailto:mohammedtarabay25@outlook.com"
         className="text-white hover:text-green-500 transition-colors duration-200"
       >
         <Mail size={24} />

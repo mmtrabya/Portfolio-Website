@@ -61,9 +61,9 @@ export const Navigation = () => {
 
         {/* Mobile menu */}
         <div
-          className={`md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 transform ${
+          className={`md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 transform ${
             isOpen ? 'translate-x-0' : 'translate-x-full'
-          } transition-transform duration-300 ease-in-out`}
+          } transition-transform duration-500 ease-in-out`}
         >
           <div className="flex justify-end p-4">
             <button
@@ -74,12 +74,12 @@ export const Navigation = () => {
             </button>
           </div>
 
-          <div className="flex flex-col items-center space-y-4">
+          <div className="flex flex-col items-center justify-center space-y-6 h-full">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-white text-2xl hover:bg-green-600 rounded-md px-4 py-2"
+                className="text-white text-2xl font-semibold bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:from-green-500 hover:to-green-700 rounded-lg px-6 py-3 shadow-lg transition-all duration-300 transform hover:scale-105"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
