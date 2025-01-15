@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,25 +10,25 @@ export const Navigation = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { href: '#about', label: 'About' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#education', label: 'Education' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#certificates', label: 'Certificates' },
-    { href: '#testimonials', label: 'Testimonials' },
-    { href: '#contact', label: 'Contact' }
+    { href: "#about", label: "About" },
+    { href: "#skills", label: "Skills" },
+    { href: "#education", label: "Education" },
+    { href: "#experience", label: "Experience" },
+    { href: "#projects", label: "Projects" },
+    { href: "#certificates", label: "Certificates" },
+    { href: "#testimonials", label: "Testimonials" },
+    { href: "#contact", label: "Contact" },
   ];
 
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black shadow-lg' : 'bg-transparent'
+        isScrolled ? "bg-black shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -61,30 +61,39 @@ export const Navigation = () => {
 
         {/* Mobile menu */}
         <div
-          className={`md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 transform ${
-            isOpen ? 'translate-x-0' : 'translate-x-full'
-          } transition-transform duration-500 ease-in-out`}
+          className={`fixed inset-0 bg-black transform ${
+            isOpen ? "translate-x-0" : "translate-x-full"
+          } transition-transform duration-500 ease-in-out z-50`}
         >
-          <div className="flex justify-end p-4">
+          <div className="flex justify-end p-6">
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white"
+              className="text-white focus:outline-none"
             >
-              <X size={24} />
+              <X size={28} />
             </button>
           </div>
 
-          <div className="flex flex-col items-center justify-center space-y-6 h-full">
+          <div className="flex flex-col items-center justify-center h-full space-y-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-white text-2xl font-semibold bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:from-green-500 hover:to-green-700 rounded-lg px-6 py-3 shadow-lg transition-all duration-300 transform hover:scale-105"
+                className="text-white text-3xl font-medium hover:text-green-400 transition-all duration-300"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
               </a>
             ))}
+
+            {/* Add a button or call-to-action for more flair */}
+            <a
+              href="#contact"
+              className="bg-green-500 text-black text-lg font-semibold rounded-full px-6 py-3 hover:bg-green-600 hover:text-white transition-all duration-300"
+              onClick={() => setIsOpen(false)}
+            >
+              Get in Touch
+            </a>
           </div>
         </div>
       </div>
