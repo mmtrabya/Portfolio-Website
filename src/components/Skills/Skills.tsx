@@ -1,5 +1,5 @@
 import React from 'react';
-import { Brain, Cog, Cpu, Terminal, Smartphone, Server } from 'lucide-react';
+import { Brain, Cog, Cpu, Terminal, Smartphone, Server, Car, vehicle} from 'lucide-react';
 import { SkillCard } from './SkillCard';
 import { SectionTitle } from '../shared/SectionTitle';
 
@@ -33,7 +33,13 @@ const skills = [
     icon: Smartphone,
     title: 'Mobile Development',
     description: 'Cross-platform Mobile Applications, Java, Kotlin, and Flutter'
-  }
+  },
+  {
+    icon: Car,
+    title: 'Self-Driving Cars',
+    description: 'Computer Vision, Sensor Fusion, and Control Systems'
+  },
+  
 ];
 
 export const Skills = () => {

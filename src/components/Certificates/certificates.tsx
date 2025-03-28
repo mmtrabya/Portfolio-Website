@@ -92,6 +92,12 @@ const certificates = [
     organization: 'Siemens & Eitsal',
     certificateUrl: 'https://drive.google.com/file/d/1-oCmtE1rDb392pfimXRo4nRD9CIBEIew/view',
   },
+  {
+    title: 'Machine Learning Nanodegree',
+    organization: 'Udemy',
+    certificateId: 'UC-703d4974-f3ea-425b-89c1-dae173f125cc',
+    certificateUrl: 'https://www.udemy.com/certificate/UC-703d4974-f3ea-425b-89c1-dae173f125cc/',
+  },
 ];
 
 export const Certificates = () => {

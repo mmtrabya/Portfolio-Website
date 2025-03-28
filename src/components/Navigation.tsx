@@ -21,6 +21,7 @@ export const Navigation = () => {
     { href: "#experience", label: "Experience" },
     { href: "#projects", label: "Projects" },
     { href: "#certificates", label: "Certificates" },
+    { href: "#achievements", label: "Achievements" },
     { href: "#testimonials", label: "Testimonials" },
     { href: "#contact", label: "Contact" },
   ];

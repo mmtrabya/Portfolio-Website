@@ -12,7 +12,7 @@ export const About = () => {
             <p className="text-gray-300 mb-8">
               I’m an AI Engineering student at Mansoura University with a passion for using AI to solve real-world challenges.
               As the Founder and Team President of the Connectors Team, I lead 60+ students in AI-driven projects.
-              I also founded Octware, an initiative to empower students in AI and Data Science. With experience in robotics, mechatronics, and embedded systems, I’m focused on integrating AI with hardware.
+              I also founded Octware, an initiative to empower students in AI and Data Science. With experience in robotics, Autonomous, and embedded systems, I’m focused on integrating AI with hardware.
               Additionally, I’m the PR/FR Director for Hult Prize Mansoura University Campus and have held leadership roles in Startup Grind and the Entrepreneurship Rally.
             </p>
           </div>

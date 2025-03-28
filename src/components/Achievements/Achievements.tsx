@@ -1,38 +1,25 @@
-/* import React from 'react';
+import React from 'react';
 import { SectionTitle } from '../shared/SectionTitle';
 import { AchievementCard } from './AchievementCard';
 
 const achievements = [
   {
-    title: 'First Place - AI Hackathon',
-    description: 'Developed an innovative AI solution for healthcare diagnostics, winning first place among 50+ teams.',
-    date: 'December 2023',
-    category: 'Competition'
+    title: '1st Place Winners In MOYS Incubation',
+    description: 'Continuing the Journey of Shot-Bot 106, We Entered A first-of-Kind Incubation and Qualified among 20 other Teams from 87 team Applied for the Incubation Sponsored by The Minister of Youth & Sports Dr. Ashraf Sobhy and the Ministry of Youth and Sports and won first place in the Incubation with a Grand Prize of 200K EGP for Developing, Building and Fabricating the Complete Solution that will take the game of Basketball into a whole new era of evolution The Project was Developed under the name of Student Activity Teams Connectors & Luminous',
+    date: '2024',
+    category: 'Competition',
   },
   {
-    title: 'Research Publication',
-    description: 'Published research paper on "Deep Learning Applications in Autonomous Systems" in IEEE Conference.',
-    date: 'October 2023',
-    category: 'Academic'
+    title: '3rd Place Winners in Benha University Hackathon for Empowering People of Determination',
+    description: 'I was the team leader for the project Shoot-Bot 106 which is made by two powerful teams Connectors & Luminous, My team and I managed to grab the 3rd place in this competition among 30 other teams which qualified from 195 teams in the competition We won 3rd Place in the (Health & Sports) track and 3rd in the whole competition ',
+    date: '2024',
+    category: 'Competition',
   },
   {
-    title: 'Outstanding Student Award',
-    description: 'Received recognition for academic excellence and leadership in AI engineering program.',
-    date: 'June 2023',
-    category: 'Academic'
+    title: 'Two Times Best Student in Student Activities',
+    date: '2022 & 2023',
+    category: 'Student Activities',
   },
-  {
-    title: 'Robotics Competition Winner',
-    description: 'Led team to victory in national robotics competition with innovative SLAM implementation.',
-    date: 'March 2023',
-    category: 'Competition'
-  },
-  {
-    title: 'AI Project Grant',
-    description: 'Secured research grant for developing AI-powered healthcare solutions.',
-    date: 'January 2023',
-    category: 'Research'
-  }
 ];
 
 export const Achievements = () => {
@@ -48,4 +35,4 @@ export const Achievements = () => {
       </div>
     </section>
   );
-}; */
+};

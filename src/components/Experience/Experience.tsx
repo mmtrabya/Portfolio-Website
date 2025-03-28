@@ -24,19 +24,19 @@ const experiences = [
   {
     title: 'Head of Software',
     company: 'Revive Team',
-    period: '08/2024 - Present',
+    period: '08/2024 - 03/2025',
     description: 'Leading software development initiatives and team management.'
   },
   {
     title: 'Vice President',
     company: 'Entrepreneurship Rally Mansoura University Society',
-    period: '12/2023 - Present',
+    period: '12/2023 - 03/2025',
     description: 'Previously Entrepreneurs Development Director, now leading entrepreneurship initiatives.'
   },
   {
     title: 'PR/FR Director',
     company: 'Hult Prize Mansoura University Campus',
-    period: '11/2024 - present',
+    period: '11/2024 - 03/2025',
     description: 'Managing public and foreign relations for Hult Prize events.'
   },
   {

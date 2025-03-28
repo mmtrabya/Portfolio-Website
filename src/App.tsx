@@ -7,7 +7,7 @@ import { Education } from './components/Education';
 import { Experience } from './components/Experience/Experience';
 import { Projects } from './components/Projects/Projects';
 import { Certificates } from './components/Certificates/certificates';
-/* import { Achievements } from './components/Achievements/Achievements'; */
+import { Achievements } from './components/Achievements/Achievements'; 
 import { Testimonials } from './components/Testimonials/Testimonials';
 import { Contact } from './components/Contact';
 import { Copyrights }  from './components/copyright';
@@ -24,7 +24,7 @@ function App() {
       <Experience />
       <Projects />
       <Certificates />
-{/*       <Achievements /> */}
+      <Achievements />
       <Testimonials />
       <Contact />
       <Copyrights />

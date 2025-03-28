@@ -18,7 +18,7 @@ export const Education = () => {
                 <p className="text-green-500 text-lg mb-2">
                   Bachelor of Engineering, Artificial Intelligence Engineering
                 </p>
-                <p className="text-gray-400">Score: 3.33 (B+)</p>
+                <p className="text-gray-400">Score: 3.4 (B+)</p>
               </div>
             </div>
           </div>
