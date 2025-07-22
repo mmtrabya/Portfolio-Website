@@ -4,10 +4,16 @@ import { SectionTitle } from '../shared/SectionTitle';
 
 const experiences = [
   {
-    title: 'Founder & Team President',
+    title: 'DevOps Engineer Intern',
+    company: 'Banque Misr',
+    period: '07/2025 - Present',
+    description: 'Assisting in DevOps practices and cloud infrastructure management.'
+  },
+  {
+    title: 'Team Advisor',
     company: 'Connectors Team',
-    period: '04/2023 - Present',
-    description: 'Leading and managing team initiatives and projects.'
+    period: '07/2025 - Present',
+    description: 'Advising and guiding team projects and initiatives.'
   },
   {
     title: 'Embedded Software Engineer Intern',
@@ -20,6 +26,12 @@ const experiences = [
     company: 'Kernel Masters',
     period: '08/2024 - Present',
     description: 'Working on automotive cybersecurity and embedded systems.'
+  },
+  {
+    title: 'Founder & Team President',
+    company: 'Connectors Team',
+    period: '04/2023 - 07/2025',
+    description: 'Leading and managing team initiatives and projects.'
   },
   {
     title: 'Head of Software',

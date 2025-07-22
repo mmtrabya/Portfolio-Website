@@ -55,7 +55,7 @@ export const Contact = () => {
               className="flex items-center gap-2 text-white hover:text-green-500 transition-colors duration-200"
             >
               <Mail size={24} />
-              <span>Work: mohammedtarabay25@outlook.com</span>
+              <span>Email: mohammedtarabay25@outlook.com</span>
             </a>
             <a
               href="tel:+201014849994"
