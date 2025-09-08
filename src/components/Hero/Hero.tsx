@@ -5,7 +5,7 @@ import { SocialLinks } from '../shared/SocialLinks';
 export const Hero = () => {
   const handleDownloadCV = () => {
     // Replace with your Google Drive direct download link
-    const cvUrl = 'https://drive.usercontent.google.com/u/0/uc?id=1iRyljFaEmW57XI0Kw6CkLjyXYxq563YL&export=download';
+    const cvUrl = 'https://drive.google.com/file/d/1YNFhxgOo8SQ4o6XV4-d6WlQR2LHvigEu/view?usp=sharing';
     window.open(cvUrl, '_blank'); // Opens in new tab (recommended)
   };
 
