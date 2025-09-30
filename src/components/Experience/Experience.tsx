@@ -4,12 +4,6 @@ import { SectionTitle } from '../shared/SectionTitle';
 
 const experiences = [
   {
-    title: 'DevOps Engineer Intern',
-    company: 'Banque Misr',
-    period: '07/2025 - Present',
-    description: 'Assisting in DevOps practices and cloud infrastructure management.'
-  },
-  {
     title: 'Team Advisor',
     company: 'Connectors Team',
     period: '07/2025 - Present',
@@ -26,6 +20,18 @@ const experiences = [
     company: 'Kernel Masters',
     period: '08/2024 - Present',
     description: 'Working on automotive cybersecurity and embedded systems.'
+  },
+  {
+    title: 'DevOps Engineer Intern',
+    company: 'Banque Misr',
+    period: '07/2025 - 09/2025',
+    description: 'Assisting in DevOps practices and cloud infrastructure management.'
+  },
+  {
+    title: 'DevOps Engineer Intern',
+    company: 'Sprints',
+    period: '07/2025 - 09/2025',
+    description: 'Learning and applying DevOps methodologies and tools.'
   },
   {
     title: 'Founder & Team President',
