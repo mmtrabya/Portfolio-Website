@@ -4,6 +4,45 @@ import { CertificateCard } from './CertificateCard';
 
 const certificates = [
   {
+    title: 'AI Engineer for Developers Associate',
+    organization: 'DataCamp',
+    certificateId: 'AIEDA0010823571054',
+    issueDate: 'Nov 2025',
+    expiryDate: 'Nov 2027',
+    certificateUrl: 'https://www.datacamp.com/certificate/AIEDA0010823571054',
+  },
+  {
+    title: 'Oracle Cloud Infrastructure 2025 Certified Data Science Professional',
+    organization: 'Oracle',
+    certificateId: '102243857OCI25DSOCP',
+    issueDate: 'Oct 2025',
+    expiryDate: 'Oct 2027',
+    certificateUrl: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=81FB40829F4C7EEF56E6C38C7A23986A572F816ED5123BE8B992CE4F9A6C61F3',
+  },
+  {
+    title: 'Oracle Cloud Infrastructure 2025 Certified DevOps Professional',
+    organization: 'Oracle',
+    certificateId: '102243857OCI25DOPOCP',
+    issueDate: 'Oct 2025',
+    expiryDate: 'Oct 2027',
+    certificateUrl: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=81FB40829F4C7EEF56E6C38C7A23986A8D78445669041E2FCB338E4332F9ABE1',
+  },
+  {
+    title: 'Rowad 2025 Internship Program – DevOps Engineering',
+    organization: 'Sprints',
+    certificateId: 'ID - SPR - B88G97',
+    issueDate: 'Sep 2025',
+    certificateUrl: 'https://sprints.ai/en-eg/journeys/learning/1344/90179401/view-certificate',
+  },
+  {
+    title: 'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',
+    organization: 'Oracle',
+    certificateId: '102243857OCI25AICFA',
+    issueDate: 'Aug 2025',
+    expiryDate: 'Aug 2027',
+    certificateUrl: 'https://catalog-education.oracle.com/ords/certview/sharebadge?id=B14FB52D0DD5584D2F269DE2563087414AA1A2C3570F7CC37E6D0FA52CBFD455',
+  },
+  {
     title: 'Delivering Quality Work with Agility',
     organization: 'IBM',
     certificateId: 'WZL56QUCW4SX',
