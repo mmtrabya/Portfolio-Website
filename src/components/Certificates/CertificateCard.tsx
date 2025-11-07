@@ -4,6 +4,8 @@ import { Award, ExternalLink } from 'lucide-react';
 interface CertificateCardProps {
   title: string;
   organization: string;
+  issueDate?: string;
+  expiryDate?: string;
   certificateId?: string;
   certificateUrl: string;
 }
@@ -11,7 +13,9 @@ interface CertificateCardProps {
 export const CertificateCard = ({ 
   title, 
   organization, 
-  certificateId, 
+  certificateId,
+  issueDate,
+  expiryDate,
   certificateUrl 
 }: CertificateCardProps) => {
   return (
