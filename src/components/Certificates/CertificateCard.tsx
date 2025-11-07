@@ -27,7 +27,16 @@ export const CertificateCard = ({
         <div className="flex-1">
           <h3 className="text-lg font-bold mb-2">{title}</h3>
           <p className="text-green-500 mb-2">{organization}</p>
-          <p className="text-gray-400 text-sm mb-4 italic">ID: {certificateId}</p>
+          {(issueDate || expiryDate) && (
+            <p className="text-gray-300 text-xs mb-2">
+              {issueDate && <>Issued <span className="font-semibold">{issueDate}</span></>}
+              {issueDate && expiryDate && ' · '}
+              {expiryDate && <>Expires <span className="font-semibold">{expiryDate}</span></>}
+            </p>
+          )}
+          {certificateId && (
+            <p className="text-gray-400 text-sm mb-4 italic">ID: {certificateId}</p>
+          )}
           <a
             href={certificateUrl}
             target="_blank"
