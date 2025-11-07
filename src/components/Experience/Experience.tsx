@@ -4,12 +4,6 @@ import { SectionTitle } from '../shared/SectionTitle';
 
 const experiences = [
   {
-    title: 'Team Advisor',
-    company: 'Connectors Team',
-    period: '07/2025 - Present',
-    description: 'Advising and guiding team projects and initiatives.'
-  },
-  {
     title: 'Embedded Software Engineer Intern',
     company: 'Learn in Depth',
     period: '04/2024 - Present',
