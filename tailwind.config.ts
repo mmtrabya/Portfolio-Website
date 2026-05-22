@@ -13,12 +13,17 @@ const config: Config = {
         "text-secondary": "var(--text-secondary)",
         "text-on-accent": "var(--text-on-accent)",
         "border-subtle": "var(--border-subtle)",
-        "accent-cyan": "var(--accent-cyan)",
-        "accent-emerald": "var(--accent-emerald)",
-        "accent-amber": "var(--accent-amber)",
+        // New palette
+        "accent-red": "var(--accent-red)",
+        "accent-gold": "var(--accent-gold)",
+        "accent-slate": "var(--accent-slate)",
+        // Backwards-compatible aliases (so existing class names keep working).
+        "accent-cyan": "var(--accent-red)",
+        "accent-emerald": "var(--accent-gold)",
+        "accent-amber": "var(--accent-slate)",
       },
       boxShadow: {
-        glow: "0 10px 40px -12px var(--accent-cyan, #22d3ee59)",
+        glow: "0 10px 40px -12px var(--accent-red, #ef444459)",
         soft: "0 4px 24px -4px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(255 255 255 / 0.06)",
       },
       fontFamily: {

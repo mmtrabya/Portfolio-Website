@@ -15,11 +15,12 @@ type Particle = {
   phase: number;
 };
 
+// Red + Gold + Slate palette.
 const PALETTES = {
-  default: ["#22d3ee", "#10b981", "#f59e0b"],
-  cyan: ["#22d3ee", "#06b6d4", "#0891b2", "#a5f3fc"],
-  emerald: ["#10b981", "#34d399", "#6ee7b7"],
-  warm: ["#f59e0b", "#f97316", "#fbbf24"],
+  default: ["#ef4444", "#fbbf24", "#94a3b8"],
+  cyan: ["#ef4444", "#dc2626", "#f87171", "#fbbf24"],
+  emerald: ["#fbbf24", "#f59e0b", "#fcd34d"],
+  warm: ["#ef4444", "#f97316", "#fbbf24"],
 } as const;
 
 export function PixelText({

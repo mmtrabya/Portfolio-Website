@@ -5,43 +5,53 @@
 @layer base {
   :root {
     color-scheme: dark;
-    --bg-main: #06121a;
-    --bg-secondary: #0a1b27;
+    --bg-main: #0a0808;
+    --bg-secondary: #14100f;
     --bg-elevated: rgba(255, 255, 255, 0.04);
-    --text-primary: #e6f1f7;
-    --text-secondary: #7a8a99;
-    --text-on-accent: #04121a;
+    --text-primary: #f4f1ed;
+    --text-secondary: #94a3b8;
+    --text-on-accent: #0a0808;
     --border-subtle: rgba(255, 255, 255, 0.08);
 
-    --accent-cyan: #22d3ee;
-    --accent-emerald: #10b981;
-    --accent-amber: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-gold: #fbbf24;
+    --accent-slate: #94a3b8;
 
-    --cursor-glow: color-mix(in srgb, var(--accent-cyan) 35%, transparent);
+    /* Aliases kept so existing classes (text-accent-cyan etc.) still resolve.
+       This way we can change the palette later without renaming hundreds of refs. */
+    --accent-cyan: var(--accent-red);
+    --accent-emerald: var(--accent-gold);
+    --accent-amber: var(--accent-slate);
+
+    --cursor-glow: color-mix(in srgb, var(--accent-red) 32%, transparent);
     --glass-bg: rgba(255, 255, 255, 0.05);
-    --glow-1: rgba(34, 211, 238, 0.22);
-    --glow-2: rgba(16, 185, 129, 0.18);
-    --card-bg: rgba(10, 27, 39, 0.7);
+    --glow-1: rgba(239, 68, 68, 0.22);
+    --glow-2: rgba(251, 191, 36, 0.18);
+    --card-bg: rgba(20, 16, 15, 0.7);
   }
 
   .light {
     color-scheme: light;
-    --bg-main: #f5f9fc;
+    --bg-main: #faf8f6;
     --bg-secondary: #ffffff;
     --bg-elevated: rgba(0, 0, 0, 0.04);
-    --text-primary: #0b1b24;
-    --text-secondary: #4a5568;
+    --text-primary: #1a0d0d;
+    --text-secondary: #475569;
     --text-on-accent: #ffffff;
     --border-subtle: rgba(0, 0, 0, 0.12);
 
-    --accent-cyan: #0891b2;
-    --accent-emerald: #059669;
-    --accent-amber: #d97706;
+    --accent-red: #dc2626;
+    --accent-gold: #d97706;
+    --accent-slate: #64748b;
 
-    --cursor-glow: color-mix(in srgb, var(--accent-cyan) 18%, transparent);
+    --accent-cyan: var(--accent-red);
+    --accent-emerald: var(--accent-gold);
+    --accent-amber: var(--accent-slate);
+
+    --cursor-glow: color-mix(in srgb, var(--accent-red) 18%, transparent);
     --glass-bg: rgba(255, 255, 255, 0.85);
-    --glow-1: rgba(8, 145, 178, 0.12);
-    --glow-2: rgba(5, 150, 105, 0.1);
+    --glow-1: rgba(220, 38, 38, 0.12);
+    --glow-2: rgba(217, 119, 6, 0.1);
     --card-bg: rgba(255, 255, 255, 0.92);
   }
 
@@ -92,7 +102,7 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--accent-cyan) 35%, transparent);
+    background: color-mix(in srgb, var(--accent-red) 35%, transparent);
     color: var(--text-primary);
   }
 }
@@ -120,12 +130,12 @@
   }
   .chip:hover {
     color: var(--text-primary);
-    border-color: var(--accent-cyan);
+    border-color: var(--accent-red);
     transform: translateY(-1px);
   }
 
   .terminal-cursor {
-    background: var(--accent-emerald);
+    background: var(--accent-gold);
     display: inline-block;
     width: 7px;
     height: 14px;
@@ -153,8 +163,8 @@
   .loading-progress {
     background: linear-gradient(
       90deg,
-      var(--accent-cyan),
-      var(--accent-emerald)
+      var(--accent-red),
+      var(--accent-gold)
     );
     transition: width 0.3s ease;
   }
@@ -162,14 +172,14 @@
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 24px color-mix(in srgb, var(--accent-cyan) 50%, transparent);
+    text-shadow: 0 0 24px color-mix(in srgb, var(--accent-red) 50%, transparent);
   }
   .bg-gradient-hero {
     background: linear-gradient(
       120deg,
-      color-mix(in srgb, var(--accent-cyan) 35%, transparent),
-      color-mix(in srgb, var(--accent-emerald) 25%, transparent),
-      color-mix(in srgb, var(--accent-amber) 22%, transparent)
+      color-mix(in srgb, var(--accent-red) 35%, transparent),
+      color-mix(in srgb, var(--accent-gold) 25%, transparent),
+      color-mix(in srgb, var(--accent-slate) 20%, transparent)
     );
     background-size: 200% 200%;
   }

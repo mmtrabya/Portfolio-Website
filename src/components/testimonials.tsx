@@ -79,13 +79,7 @@ export function Testimonials() {
               <Quote className="h-5 w-5" strokeWidth={2.2} />
             </span>
             <blockquote className="relative ml-0 mt-4 text-base leading-relaxed text-text-secondary sm:text-lg sm:leading-[1.7]">
-              <span className="mr-1 font-serif text-2xl leading-none text-accent-cyan">
-                “
-              </span>
               {t.quote}
-              <span className="ml-1 font-serif text-2xl leading-none text-accent-cyan">
-                ”
-              </span>
             </blockquote>
             <figcaption className="mt-6 flex items-center justify-between gap-4">
               <div>

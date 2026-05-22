@@ -19,12 +19,12 @@ export const ABOUT_BODY =
 
 export const NOW_LABEL = "Now";
 export const NOW_BODY =
-  "Wrapping up B.Eng. in AI Engineering at Mansoura University while leading the SDV graduation project and shipping cloud-native DevOps work. Open to full-time Software / AI / DevOps roles starting Feb 2026.";
+  "B.Sc. in Artificial Intelligence Engineering from Mansoura University, with hands-on work across AI, robotics, embedded systems, and cloud-native DevOps. Available now for full-time Software / AI / DevOps roles — let’s talk.";
 
 export const QUICK_FACTS: { label: string; value: string }[] = [
   { label: "Current Focus", value: "AI · DevOps · SDV Robotics" },
   { label: "Location", value: "Cairo, Egypt" },
-  { label: "Education", value: "B.Eng. AI Engineering — Mansoura (GPA 3.47)" },
+  { label: "Education", value: "B.Sc. AI Engineering — Mansoura (GPA 3.47)" },
   { label: "Founder", value: "Connectors Team · Octware" },
 ];
 
@@ -346,7 +346,7 @@ export const PROJECTS: Project[] = [
     metrics: "ADAS · V2V/V2I/V2X · OTA-ready",
     repo: "https://github.com/mmtrabya",
     featured: true,
-    gradient: { from: "#22d3ee", via: "#0891b2", to: "#10b981" },
+    gradient: { from: "#ef4444", via: "#f97316", to: "#fbbf24" },
     details: {
       problem:
         "Modern urban mobility needs vehicles that perceive, communicate, and update themselves — but most prototypes silo perception, comms, and apps.",
@@ -378,7 +378,7 @@ export const PROJECTS: Project[] = [
     metrics: "5 services · GitOps · IaC",
     repo: "https://github.com/mmtrabya/Voting-App-Microservices-DevOps",
     featured: true,
-    gradient: { from: "#f59e0b", via: "#ef4444", to: "#ec4899" },
+    gradient: { from: "#fbbf24", via: "#dc2626", to: "#7f1d1d" },
     details: {
       problem:
         "Multi-language microservices apps drift between dev and prod without proper IaC, GitOps, and observability.",
@@ -401,7 +401,7 @@ export const PROJECTS: Project[] = [
     metrics: "SLAM · Nav2 · Real-time",
     repo: "https://github.com/mmtrabya/autords",
     featured: true,
-    gradient: { from: "#8b5cf6", via: "#6366f1", to: "#22d3ee" },
+    gradient: { from: "#94a3b8", via: "#475569", to: "#ef4444" },
     details: {
       problem:
         "Hospital staff lose hours moving supplies between rooms — but robotic delivery requires safe, deterministic navigation in a dynamic environment.",
@@ -432,7 +432,7 @@ export const PROJECTS: Project[] = [
     metrics: "AR/EN · T5 fine-tune",
     repo: "https://github.com/mmtrabya/Job-Hunting-WebScraping",
     featured: false,
-    gradient: { from: "#10b981", via: "#06b6d4", to: "#3b82f6" },
+    gradient: { from: "#fbbf24", via: "#f59e0b", to: "#dc2626" },
     details: {
       problem:
         "Job listings are fragmented across portals and language barriers make discovery harder for bilingual users.",
@@ -455,7 +455,7 @@ export const PROJECTS: Project[] = [
     metrics: "ResNet50 · PyTorch",
     repo: "https://github.com/mmtrabya/ResNet50_Plant_Disease_Detection",
     featured: false,
-    gradient: { from: "#84cc16", via: "#10b981", to: "#0d9488" },
+    gradient: { from: "#fde047", via: "#fbbf24", to: "#b45309" },
     details: {
       problem:
         "Smallholder farmers need fast, accurate disease detection without sending samples to a lab.",
@@ -478,7 +478,7 @@ export const PROJECTS: Project[] = [
     metrics: "PySpark · ALS",
     repo: "https://github.com/mmtrabya/Apache-Recommender-MovieLens",
     featured: false,
-    gradient: { from: "#f97316", via: "#f59e0b", to: "#eab308" },
+    gradient: { from: "#ef4444", via: "#dc2626", to: "#94a3b8" },
     details: {
       problem:
         "Naive recommenders break at scale; Spark + ALS is the canonical way to handle large interaction matrices.",
@@ -494,7 +494,7 @@ export const EDUCATION = [
   {
     school: "Mansoura University",
     schoolUrl: "https://www.mans.edu.eg/en",
-    degree: "B.Eng. in Artificial Intelligence Engineering",
+    degree: "B.Sc. in Artificial Intelligence Engineering",
     year: "Sep 2021 — Feb 2026",
     gpa: "3.47/4.00 (B+)",
     details:

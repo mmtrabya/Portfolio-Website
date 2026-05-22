@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { withBasePath } from "@/lib/utils";
 import { Button } from "./button";
 import { InlineTerminal } from "./terminal";
 import {
@@ -50,7 +50,7 @@ export function Hero() {
                   <span className="absolute h-2 w-2 animate-ping rounded-full bg-accent-emerald/60" />
                   <span className="h-1.5 w-1.5 rounded-full bg-accent-emerald" />
                 </span>
-                Open to roles · Feb 2026
+                Available now
               </span>
               {TAGS.map((t) => (
                 <span key={t} className="chip">
@@ -146,13 +146,15 @@ function Portrait() {
       />
       <div className="relative h-56 w-56 overflow-hidden rounded-full border border-border-subtle bg-bg-secondary shadow-glow sm:h-64 sm:w-64 lg:h-72 lg:w-72">
         {!errored ? (
-          <Image
-            src="/portrait.jpg"
+          // Plain <img> rather than next/image because `images.unoptimized` +
+          // static export doesn't reliably prepend basePath on GitHub Pages.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={withBasePath("/portrait.jpg")}
             alt={`Portrait of ${NAME}`}
-            fill
-            sizes="(min-width: 1024px) 18rem, (min-width: 640px) 16rem, 14rem"
-            className="object-cover"
-            priority
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+            decoding="async"
             onError={() => setErrored(true)}
           />
         ) : (

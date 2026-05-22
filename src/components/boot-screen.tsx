@@ -221,16 +221,16 @@ function MatrixCanvas() {
             cells[r * cols + c] *
             (0.5 * Math.sin(0.006 * t + 0.14 * c + 0.1 * r) + 0.5);
           if (v > 0.86) {
-            ctx.fillStyle = `rgba(34,211,238,${((v - 0.86) / 0.14) * 0.08})`;
+            ctx.fillStyle = `rgba(239,68,68,${((v - 0.86) / 0.14) * 0.08})`;
             ctx.fillRect(c * 18, r * 18, 17, 17);
           }
         }
       }
       const beam = (0.8 * t) % h;
       const grad = ctx.createLinearGradient(0, beam - 60, 0, beam + 60);
-      grad.addColorStop(0, "rgba(16,185,129,0)");
-      grad.addColorStop(0.5, "rgba(16,185,129,0.035)");
-      grad.addColorStop(1, "rgba(16,185,129,0)");
+      grad.addColorStop(0, "rgba(251,191,36,0)");
+      grad.addColorStop(0.5, "rgba(251,191,36,0.035)");
+      grad.addColorStop(1, "rgba(251,191,36,0)");
       ctx.fillStyle = grad;
       ctx.fillRect(0, beam - 60, w, 120);
       t++;
