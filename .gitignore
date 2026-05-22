@@ -1,0 +1,44 @@
+# ── Build outputs ────────────────────────────────────────────────
+/node_modules
+/.next
+/out
+/.vercel
+/build
+/dist
+
+# ── TypeScript caches ────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts.timestamp-*
+
+# ── Logs & runtime ───────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnp.*
+
+# ── Env ──────────────────────────────────────────────────────────
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ── Tool-specific dotfolders (do not commit these) ──────────────
+/.agents
+/.claude
+/.kiro
+/.wolf
+/.specpulse
+/.venv
+/CLAUDE.md
+
+# ── OS ──────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# NOTE: .github/ is intentionally NOT ignored — it contains the
+# Actions workflow that builds and deploys the site.
