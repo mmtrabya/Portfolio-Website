@@ -63,15 +63,9 @@ export function Testimonials() {
             animate={animate ? { opacity: 1, x: 0 } : false}
             exit={animate ? { opacity: 0, x: direction * -30 } : undefined}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="glass-panel relative overflow-hidden p-6 pt-12 sm:p-10 sm:pt-14"
+            className="glass-panel relative overflow-hidden p-6 pt-14 sm:p-10 sm:pt-16"
           >
-            {/* Big watermark quote in the corner */}
-            <Quote
-              aria-hidden
-              strokeWidth={1.5}
-              className="pointer-events-none absolute -top-2 -left-2 h-32 w-32 rotate-180 text-accent-cyan/10 sm:h-40 sm:w-40"
-            />
-            {/* Visible quote chip badge */}
+            {/* Small visible quote chip badge (no large watermark) */}
             <span
               aria-hidden
               className="absolute left-6 top-6 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-accent-cyan/30 bg-accent-cyan/10 text-accent-cyan shadow-glow sm:left-8 sm:top-8"
