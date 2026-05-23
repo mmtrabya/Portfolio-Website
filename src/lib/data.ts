@@ -12,17 +12,17 @@ export const PHONE = "+201014849994";
 export const RESUME_PATH = "/Mohammed_Tarabay_Resume.pdf";
 
 export const ABOUT_HEADLINE =
-  "Multidisciplinary engineer building AI-powered systems end to end";
+  "Multidisciplinary Engineer building AI-powered systems end to end";
 
 export const ABOUT_BODY =
-  "AI Engineering student at Mansoura University focused on shipping AI that actually runs on real hardware — autonomous mobility, ADAS, robotics, and cloud-native DevOps. Founder of Connectors Team (200+ students) and Octware. Track record across Banque Misr, Sprints, NTI, and university competitions, with a habit of taking systems from prototype to production.";
+  "AI Engineer focused on shipping AI that actually runs on real hardware — autonomous mobility, ADAS, robotics, and cloud-native DevOps. Founder of Connectors Team and Octware. Track record across Banque Misr, Sprints, NTI, and university competitions, with a habit of taking systems from prototype to production.";
 
 export const NOW_LABEL = "Now";
 export const NOW_BODY =
   "B.Sc. in Artificial Intelligence Engineering from Mansoura University, with hands-on work across AI, robotics, embedded systems, and cloud-native DevOps. Available now for full-time Software / AI / DevOps roles — let’s talk.";
 
 export const QUICK_FACTS: { label: string; value: string }[] = [
-  { label: "Current Focus", value: "AI · DevOps · SDV Robotics" },
+  { label: "Current Focus", value: "AI · DevOps · Robotics · Autonomous Systems" },
   { label: "Location", value: "Cairo, Egypt" },
   { label: "Education", value: "B.Sc. AI Engineering — Mansoura (GPA 3.47)" },
   { label: "Founder", value: "Connectors Team · Octware" },
@@ -57,12 +57,22 @@ export const SKILLS: Record<string, { name: string }[]> = {
     { name: "Dart" },
     { name: "Flutter" },
     { name: "Java" },
+    { name: "TypeScript" },
   ],
   "Embedded & IoT Tools": [
     { name: "Arduino" },
     { name: "ESP32" },
     { name: "AVR" },
     { name: "Raspberry Pi" },
+    { name: "SPI" },
+    { name: "I2C" },
+    { name: "UART" },
+    { name: "CAN" },
+    { name: "LIN" },
+    { name: "Ethernet" },
+    { name: "MQTT" },
+    { name: "V2X" },
+    { name: "Sensor Management" },
   ],
   "Cloud & DevOps": [
     { name: "Docker" },
@@ -72,6 +82,8 @@ export const SKILLS: Record<string, { name: string }[]> = {
     { name: "GitHub Actions" },
     { name: "Azure DevOps" },
     { name: "AWS" },
+    { name: "ArgoCD" },
+    { name: "GCP" },
     { name: "Prometheus" },
     { name: "Grafana" },
   ],
@@ -127,7 +139,7 @@ export const EXPERIENCE: Experience[] = [
       "Investigating attack surfaces in vehicle networks and ECU firmware.",
       "Embedded systems analysis and secure-by-design patterns.",
     ],
-    category: "Engineering",
+    category: "Engineering", 
     tech: ["Automotive", "Cybersecurity", "Embedded C", "CAN"],
   },
   {
@@ -695,8 +707,9 @@ export const CERTIFICATIONS: Certification[] = [
   },
   {
     title: "IELTS Academic — Band 7.0",
-    issuer: "British Council",
-    issueDate: "2024",
+    issuer: "IDP Education",
+    issueDate: "Jan 2026",
+    expiryDate: "Jan 2028",
   },
 ];
 
