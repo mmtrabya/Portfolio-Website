@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Calendar, Flame, Folder, GitCommit, Github } from "lucide-react";
+import { Calendar, ExternalLink, Flame, Folder, GitCommit, Github } from "lucide-react";
 import { Section, SectionLabel, SectionPixelTitle } from "./section";
 import { GITHUB_URL } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -11,6 +11,10 @@ const USERNAME = "mmtrabya";
 // Public API that mirrors GitHub's contribution graph (no auth required).
 const CONTRIBUTIONS_API = `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`;
 const USER_API = `https://api.github.com/users/${USERNAME}`;
+// Use the Search API for commits. Unlike /events/public, this returns the
+// actual commit metadata even for force-pushed history. Rate-limited but
+// fine for a personal portfolio.
+const COMMITS_SEARCH_API = `https://api.github.com/search/commits?q=author:${USERNAME}&sort=committer-date&order=desc&per_page=15`;
 
 // Platane/snk generates this SVG via a daily GitHub Action that runs in
 // your Portfolio-Website repo. It produces a snake animation eating the
@@ -27,6 +31,40 @@ type ContributionsApiResponse = {
   total: Record<string, number>;
   contributions: ApiDay[];
 };
+
+// Subset of GitHub search/commits API response shape.
+type SearchCommitItem = {
+  sha: string;
+  html_url: string;
+  commit: {
+    message: string;
+    committer: { date: string };
+  };
+  repository: { full_name: string };
+};
+
+type FlatCommit = {
+  sha: string;
+  message: string;
+  repo: string;
+  url: string;
+  createdAt: string;
+};
+
+function timeAgo(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime();
+  const sec = Math.floor(diff / 1000);
+  if (sec < 60) return `${sec}s ago`;
+  const min = Math.floor(sec / 60);
+  if (min < 60) return `${min}m ago`;
+  const hr = Math.floor(min / 60);
+  if (hr < 24) return `${hr}h ago`;
+  const day = Math.floor(hr / 24);
+  if (day < 30) return `${day}d ago`;
+  const mo = Math.floor(day / 30);
+  if (mo < 12) return `${mo}mo ago`;
+  return `${Math.floor(mo / 12)}y ago`;
+}
 
 const LEVEL_CLASS: Record<ApiDay["level"], string> = {
   0: "bg-bg-elevated",
@@ -67,8 +105,9 @@ function StatCard({ icon, value, label, loading }: StatProps) {
 export function GithubActivity() {
   const [days, setDays] = useState<ApiDay[] | null>(null);
   const [repoCount, setRepoCount] = useState<number | null>(null);
+  const [commits, setCommits] = useState<FlatCommit[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [tab, setTab] = useState<"heatmap" | "snake">("heatmap");
+  const [tab, setTab] = useState<"heatmap" | "commits" | "snake">("heatmap");
   const [hovered, setHovered] = useState<ApiDay | null>(null);
   const [snakeOk, setSnakeOk] = useState(true);
 
@@ -76,9 +115,13 @@ export function GithubActivity() {
     let cancelled = false;
     const load = async () => {
       try {
-        const [contribRes, userRes] = await Promise.all([
+        const [contribRes, userRes, commitsRes] = await Promise.all([
           fetch(CONTRIBUTIONS_API),
           fetch(USER_API),
+          // search/commits requires this Accept header
+          fetch(COMMITS_SEARCH_API, {
+            headers: { Accept: "application/vnd.github+json" },
+          }),
         ]);
         if (!contribRes.ok) throw new Error(`Contributions: ${contribRes.status}`);
         const contribJson = (await contribRes.json()) as ContributionsApiResponse;
@@ -88,6 +131,22 @@ export function GithubActivity() {
         if (userRes.ok) {
           const userJson = (await userRes.json()) as { public_repos?: number };
           if (!cancelled) setRepoCount(userJson.public_repos ?? null);
+        }
+
+        if (commitsRes.ok) {
+          const json = (await commitsRes.json()) as {
+            items?: SearchCommitItem[];
+          };
+          const flat: FlatCommit[] = (json.items ?? []).map((it) => ({
+            sha: it.sha,
+            message: it.commit.message.split("\n")[0],
+            repo: it.repository.full_name,
+            url: it.html_url,
+            createdAt: it.commit.committer.date,
+          }));
+          if (!cancelled) setCommits(flat);
+        } else if (!cancelled) {
+          setCommits([]);
         }
       } catch (err) {
         if (!cancelled) {
@@ -179,32 +238,82 @@ export function GithubActivity() {
 
       {/* Tabs */}
       <div className="flex items-center gap-1 rounded-lg border border-border-subtle bg-bg-elevated p-1 w-fit">
-        <button
-          onClick={() => setTab("heatmap")}
-          className={cn(
-            "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
-            tab === "heatmap"
-              ? "bg-accent-emerald/15 text-accent-emerald"
-              : "text-text-secondary hover:text-text-primary"
-          )}
-        >
-          Heatmap
-        </button>
-        <button
-          onClick={() => setTab("snake")}
-          className={cn(
-            "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
-            tab === "snake"
-              ? "bg-accent-emerald/15 text-accent-emerald"
-              : "text-text-secondary hover:text-text-primary"
-          )}
-        >
-          🐍 Snake
-        </button>
+        {(
+          [
+            { key: "heatmap", label: "Heatmap" },
+            { key: "commits", label: "Recent Commits" },
+            { key: "snake", label: "🐍 Snake" },
+          ] as const
+        ).map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={cn(
+              "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
+              tab === t.key
+                ? "bg-accent-emerald/15 text-accent-emerald"
+                : "text-text-secondary hover:text-text-primary"
+            )}
+          >
+            {t.label}
+          </button>
+        ))}
       </div>
 
       <div className="glass-panel p-5">
-        {tab === "heatmap" ? (
+        {tab === "commits" ? (
+          commits === null ? (
+            <div className="grid place-items-center py-10 text-sm text-text-secondary">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-accent-emerald" />
+                Loading recent commits…
+              </div>
+            </div>
+          ) : commits.length === 0 ? (
+            <p className="py-6 text-center text-sm text-text-secondary">
+              No recent push events found in the last 90 days. See{" "}
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="text-accent-cyan hover:underline"
+              >
+                @{USERNAME}
+              </a>{" "}
+              for the full activity feed.
+            </p>
+          ) : (
+            <ul className="divide-y divide-border-subtle/60">
+              {commits.map((c) => (
+                <li key={c.sha} className="py-3 first:pt-0 last:pb-0">
+                  <a
+                    href={c.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-start gap-3"
+                  >
+                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-accent-emerald/10 text-accent-emerald">
+                      <GitCommit className="h-3.5 w-3.5" />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm text-text-primary group-hover:text-accent-cyan">
+                        {c.message}
+                      </p>
+                      <p className="mt-0.5 flex items-center gap-2 text-xs text-text-secondary">
+                        <span className="font-mono">{c.repo}</span>
+                        <span aria-hidden>·</span>
+                        <span>{timeAgo(c.createdAt)}</span>
+                        <span aria-hidden>·</span>
+                        <span className="font-mono">{c.sha.slice(0, 7)}</span>
+                      </p>
+                    </div>
+                    <ExternalLink className="mt-1 h-3.5 w-3.5 shrink-0 text-text-secondary opacity-0 transition-opacity group-hover:opacity-100" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        ) : tab === "heatmap" ? (
           loading ? (
             <div className="grid place-items-center py-10 text-sm text-text-secondary">
               <div className="flex items-center gap-2">
