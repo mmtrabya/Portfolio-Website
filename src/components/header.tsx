@@ -19,6 +19,24 @@ import { useMotionPreference } from "@/lib/use-motion-preference";
 
 const GLOW_KEY = "glow-enabled";
 
+// Each nav link gets its own brand color, cycling through the palette.
+// `active` is the bright color when the section is in view; `hover` is the
+// subtle hint on mouse-over for inactive links.
+const NAV_TONES = [
+  {
+    active: "text-accent-red [text-shadow:0_0_18px_rgba(244,63,94,0.55)]",
+    hover: "hover:text-accent-red",
+  },
+  {
+    active: "text-accent-gold [text-shadow:0_0_18px_rgba(252,211,77,0.55)]",
+    hover: "hover:text-accent-gold",
+  },
+  {
+    active: "text-accent-neon [text-shadow:0_0_18px_rgba(6,255,240,0.6)]",
+    hover: "hover:text-accent-neon",
+  },
+];
+
 export function Header({ onOpenCommand }: { onOpenCommand: () => void }) {
   const { resolvedTheme, setTheme, mounted: themeMounted } = useTheme();
   const { motionEnabled, toggleMotion, hydrated } = useMotionPreference();
@@ -124,20 +142,24 @@ export function Header({ onOpenCommand }: { onOpenCommand: () => void }) {
         </button>
 
         <nav className="ml-auto hidden items-center gap-1 lg:flex">
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNav(item.id)}
-              className={cn(
-                "rounded-md px-3 py-1.5 text-sm transition-colors",
-                active === item.id
-                  ? "text-accent-cyan"
-                  : "text-text-secondary hover:text-text-primary"
-              )}
-            >
-              {item.label}
-            </button>
-          ))}
+          {NAV_ITEMS.map((item, i) => {
+            const tone = NAV_TONES[i % NAV_TONES.length];
+            const isActive = active === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleNav(item.id)}
+                className={cn(
+                  "rounded-md px-3 py-1.5 text-sm transition-colors",
+                  isActive
+                    ? tone.active
+                    : `text-text-secondary ${tone.hover}`
+                )}
+              >
+                {item.label}
+              </button>
+            );
+          })}
         </nav>
 
         <div className="ml-auto flex items-center gap-2 lg:ml-3">
@@ -207,20 +229,24 @@ export function Header({ onOpenCommand }: { onOpenCommand: () => void }) {
       {mobileOpen && (
         <div className="border-t border-border-subtle bg-bg-secondary lg:hidden">
           <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4">
-            {NAV_ITEMS.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNav(item.id)}
-                className={cn(
-                  "rounded-md px-3 py-2 text-left text-sm",
-                  active === item.id
-                    ? "bg-bg-elevated text-accent-cyan"
-                    : "text-text-secondary hover:bg-bg-elevated"
-                )}
-              >
-                {item.label}
-              </button>
-            ))}
+            {NAV_ITEMS.map((item, i) => {
+              const tone = NAV_TONES[i % NAV_TONES.length];
+              const isActive = active === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleNav(item.id)}
+                  className={cn(
+                    "rounded-md px-3 py-2 text-left text-sm",
+                    isActive
+                      ? `bg-bg-elevated ${tone.active}`
+                      : `text-text-secondary hover:bg-bg-elevated ${tone.hover}`
+                  )}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
             <div className="mt-2 grid grid-cols-2 gap-2">
               <Button asChild size="sm" className="w-full">
                 <a href={withBasePath(RESUME_PATH)} download>
