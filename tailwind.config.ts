@@ -13,17 +13,18 @@ const config: Config = {
         "text-secondary": "var(--text-secondary)",
         "text-on-accent": "var(--text-on-accent)",
         "border-subtle": "var(--border-subtle)",
-        // New palette
+        // Cyberpunk palette
         "accent-red": "var(--accent-red)",
         "accent-gold": "var(--accent-gold)",
+        "accent-neon": "var(--accent-neon)",
         "accent-slate": "var(--accent-slate)",
-        // Backwards-compatible aliases (so existing class names keep working).
-        "accent-cyan": "var(--accent-red)",
+        // Aliases so existing classes (accent-cyan/emerald/amber) keep working.
+        "accent-cyan": "var(--accent-neon)",
         "accent-emerald": "var(--accent-gold)",
-        "accent-amber": "var(--accent-slate)",
+        "accent-amber": "var(--accent-red)",
       },
       boxShadow: {
-        glow: "0 10px 40px -12px var(--accent-red, #ef444459)",
+        glow: "0 10px 40px -12px var(--accent-neon, #06fff058)",
         soft: "0 4px 24px -4px rgb(0 0 0 / 0.45), 0 0 0 1px rgb(255 255 255 / 0.06)",
       },
       fontFamily: {

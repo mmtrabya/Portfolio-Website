@@ -21,7 +21,7 @@ export function Experience() {
 
   return (
     <Section id="experience" className="space-y-10">
-      <SectionPixelTitle text="EXPERIENCE" palette="cyan" />
+      <SectionPixelTitle text="EXPERIENCE" icon="briefcase" palette="cyan" />
       <div className="space-y-3">
         <SectionLabel>Experience</SectionLabel>
         <h2>Impactful roles</h2>

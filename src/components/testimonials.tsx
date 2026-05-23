@@ -26,7 +26,7 @@ export function Testimonials() {
 
   return (
     <Section id="testimonials" className="space-y-10">
-      <SectionPixelTitle text="TESTIMONIALS" palette="default" />
+      <SectionPixelTitle text="TESTIMONIALS" icon="quote" palette="default" />
       <div className="flex items-end justify-between gap-3">
         <div className="space-y-3">
           <SectionLabel>Testimonials</SectionLabel>

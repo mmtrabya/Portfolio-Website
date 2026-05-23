@@ -32,7 +32,7 @@ export function Projects() {
 
   return (
     <Section id="projects" className="space-y-10">
-      <SectionPixelTitle text="PROJECTS" palette="default" />
+      <SectionPixelTitle text="PROJECTS" icon="folder" palette="default" />
       <div className="space-y-3">
         <SectionLabel>Projects</SectionLabel>
         <h2>Building systems that last</h2>

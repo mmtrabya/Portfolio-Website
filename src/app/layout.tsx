@@ -8,6 +8,7 @@ import {
   ThemeProvider,
   THEME_BOOTSTRAP_SCRIPT,
 } from "@/components/theme-provider";
+import { withBasePath } from "@/lib/utils";
 import "./globals.css";
 
 const inter = Inter({
@@ -50,9 +51,8 @@ export const metadata: Metadata = {
     description: "AI · DevOps · Robotics. Builder of autonomous mobility and cloud-native systems.",
     images: ["/og-image.svg"],
   },
-  icons: {
-    icon: "/favicon.svg",
-  },
+  // Icons are wired manually in <head> below because Next's metadata.icons
+  // doesn't reliably prepend basePath in static export.
 };
 
 export const viewport: Viewport = {
@@ -75,6 +75,8 @@ export default function RootLayout({
       style={{ colorScheme: "dark" }}
     >
       <head>
+        <link rel="icon" type="image/svg+xml" href={withBasePath("/favicon.svg")} />
+        <link rel="apple-touch-icon" href={withBasePath("/favicon.svg")} />
         <script
           dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }}
         />

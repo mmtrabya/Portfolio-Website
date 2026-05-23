@@ -94,13 +94,13 @@ export function Contact() {
 
   return (
     <Section id="contact" className="space-y-10">
-      <SectionPixelTitle text="CONTACT" palette="warm" />
+      <SectionPixelTitle text="CONTACT" icon="mail" palette="warm" />
       <div className="space-y-3">
         <SectionLabel>Contact</SectionLabel>
         <h2>Let’s build something</h2>
         <p className="max-w-3xl text-text-secondary">
-          Reach out about full-time roles starting Feb 2026, freelance AI/DevOps
-          work, or open-source collaboration.
+          Reach out about full-time roles, freelance AI/DevOps work, or
+          open-source collaboration. I’m available now and reply fast.
         </p>
       </div>
 

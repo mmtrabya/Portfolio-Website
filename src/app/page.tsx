@@ -18,25 +18,45 @@ import { Testimonials } from "@/components/testimonials";
 
 const BOOT_KEY = "boot-seen";
 
+// Synchronously decide whether boot screen should show. We can read
+// sessionStorage in module scope on the client (it's a "use client" file),
+// but during SSR sessionStorage doesn't exist — so we default to "show boot"
+// on the server so the initial HTML covers the screen with the boot overlay.
+function initialShowBoot(): boolean {
+  if (typeof window === "undefined") return true; // SSR — render boot
+  try {
+    return !sessionStorage.getItem(BOOT_KEY);
+  } catch {
+    return false;
+  }
+}
+
 export default function Page() {
-  const [showBoot, setShowBoot] = useState(false);
+  const [showBoot, setShowBoot] = useState<boolean>(initialShowBoot);
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setHydrated(true);
-    const seen = sessionStorage.getItem(BOOT_KEY);
-    if (!seen) setShowBoot(true);
+    // Once React owns the boot screen, remove the pre-paint overlay set by the
+    // theme-bootstrap script in <head>.
+    document.documentElement.classList.remove("booting");
+    const pre = document.getElementById("boot-pre");
+    if (pre) pre.remove();
+    const preStyle = document.getElementById("boot-pre-style");
+    if (preStyle) preStyle.remove();
   }, []);
 
   const finishBoot = () => {
-    sessionStorage.setItem(BOOT_KEY, "1");
+    try {
+      sessionStorage.setItem(BOOT_KEY, "1");
+    } catch {
+      // sessionStorage may be unavailable (e.g. privacy mode)
+    }
     setShowBoot(false);
   };
 
   return (
     <>
-      {hydrated && showBoot && <BootScreen onDone={finishBoot} />}
+      {showBoot && <BootScreen onDone={finishBoot} />}
       <Header onOpenCommand={() => setPaletteOpen(true)} />
       <main className="relative">
         <Hero />

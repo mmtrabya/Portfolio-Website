@@ -144,7 +144,14 @@ function Portrait() {
         aria-hidden
         className="absolute -inset-6 rounded-full bg-accent-cyan/20 blur-3xl"
       />
-      <div className="relative h-56 w-56 overflow-hidden rounded-full border border-border-subtle bg-bg-secondary shadow-glow sm:h-64 sm:w-64 lg:h-72 lg:w-72">
+      <div
+        className="relative overflow-hidden rounded-full border border-border-subtle bg-bg-secondary shadow-glow"
+        style={{
+          // Fluid sizing — scales with viewport between 18rem (288px) and 26rem (416px)
+          width: "clamp(18rem, 28vw, 26rem)",
+          height: "clamp(18rem, 28vw, 26rem)",
+        }}
+      >
         {!errored ? (
           // Plain <img> rather than next/image because `images.unoptimized` +
           // static export doesn't reliably prepend basePath on GitHub Pages.

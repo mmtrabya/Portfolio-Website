@@ -26,7 +26,7 @@ export function Education() {
 
   return (
     <Section id="education" className="space-y-10">
-      <SectionPixelTitle text="EDUCATION" palette="default" />
+      <SectionPixelTitle text="EDUCATION" icon="graduation" palette="default" />
       <div className="space-y-3">
         <SectionLabel>Education & Achievements</SectionLabel>
         <h2>Foundations and recognition</h2>

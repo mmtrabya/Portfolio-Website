@@ -6,8 +6,11 @@ import { useMotionPreference } from "@/lib/use-motion-preference";
 type Particle = {
   x: number;
   y: number;
-  tx: number;
-  ty: number;
+  // Two target positions — particle lerps between them based on `progress`.
+  wordX: number;
+  wordY: number;
+  iconX: number;
+  iconY: number;
   vx: number;
   vy: number;
   color: string;
@@ -15,17 +18,24 @@ type Particle = {
   phase: number;
 };
 
-// Red + Gold + Slate palette.
+// Cyberpunk palette: crimson + gold + electric cyan.
 const PALETTES = {
-  default: ["#ef4444", "#fbbf24", "#94a3b8"],
-  cyan: ["#ef4444", "#dc2626", "#f87171", "#fbbf24"],
-  emerald: ["#fbbf24", "#f59e0b", "#fcd34d"],
-  warm: ["#ef4444", "#f97316", "#fbbf24"],
+  default: ["#f43f5e", "#fcd34d", "#06fff0"],
+  cyan: ["#06fff0", "#22d3ee", "#67e8f9", "#fcd34d"],
+  emerald: ["#fcd34d", "#facc15", "#fde047", "#f43f5e"],
+  warm: ["#f43f5e", "#fb7185", "#fcd34d"],
 } as const;
 
+/**
+ * PixelText with morph: dots form `text` when in view, and morph into the SVG
+ * `iconPath` (a `path d=…` string from any Lucide icon) when scrolled away.
+ *
+ * The mouse-repel scatter still applies on hover.
+ */
 export function PixelText({
   text,
-  height = 180,
+  iconPath,
+  height = 200,
   density = 6,
   dotSize = 2.4,
   palette = "default",
@@ -33,6 +43,9 @@ export function PixelText({
   fontWeight = 900,
 }: {
   text: string;
+  /** Optional Lucide-style SVG path data (`d` attribute). If provided, the
+   *  dots morph into this shape when the section is out of view. */
+  iconPath?: string | string[];
   height?: number;
   density?: number;
   dotSize?: number;
@@ -57,9 +70,31 @@ export function PixelText({
     const mouse = { x: -10000, y: -10000, active: false };
     const colors = [...PALETTES[palette]];
     let running = false;
-    let isInView = false;
     const repelR = 90;
     const repelR2 = repelR * repelR;
+    // 0 = pure icon shape, 1 = pure word.
+    let progress = 0;
+
+    const samplePositions = (drawFn: (ctx: CanvasRenderingContext2D) => void): {
+      x: number;
+      y: number;
+    }[] => {
+      const oc = document.createElement("canvas");
+      oc.width = width;
+      oc.height = h;
+      const octx = oc.getContext("2d", { willReadFrequently: true });
+      if (!octx) return [];
+      drawFn(octx);
+      const img = octx.getImageData(0, 0, width, h).data;
+      const pts: { x: number; y: number }[] = [];
+      for (let y = 0; y < h; y += density) {
+        for (let x = 0; x < width; x += density) {
+          const idx = (y * width + x) * 4 + 3;
+          if (img[idx] > 128) pts.push({ x, y });
+        }
+      }
+      return pts;
+    };
 
     const init = () => {
       width = canvas.offsetWidth;
@@ -69,52 +104,74 @@ export function PixelText({
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const oc = document.createElement("canvas");
-      oc.width = width;
-      oc.height = h;
-      const octx = oc.getContext("2d", { willReadFrequently: true });
-      if (!octx) return;
-
       const fontFamily =
         getComputedStyle(canvas).getPropertyValue("--font-inter") ||
         "ui-sans-serif, system-ui, sans-serif";
 
-      // Find a font size that fits the text in the canvas width.
-      let fontSize = h * 0.9;
-      octx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
-      let measure = octx.measureText(text).width;
-      const maxW = width * 0.96;
-      if (measure > maxW) {
-        fontSize = fontSize * (maxW / measure);
-        octx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
-        measure = octx.measureText(text).width;
-      }
-
-      octx.fillStyle = "white";
-      octx.textAlign = "center";
-      octx.textBaseline = "middle";
-      octx.fillText(text, width / 2, h / 2);
-
-      const img = octx.getImageData(0, 0, width, h).data;
-      const next: Particle[] = [];
-      for (let y = 0; y < h; y += density) {
-        for (let x = 0; x < width; x += density) {
-          const idx = (y * width + x) * 4 + 3;
-          if (img[idx] > 128) {
-            const color = colors[(x + y) % colors.length];
-            next.push({
-              x: width / 2 + (Math.random() - 0.5) * width,
-              y: h + Math.random() * h,
-              tx: x,
-              ty: y,
-              vx: 0,
-              vy: 0,
-              color,
-              size: dotSize + Math.random() * 0.8,
-              phase: Math.random() * Math.PI * 2,
-            });
-          }
+      // Word sample.
+      const wordPoints = samplePositions((c) => {
+        let fontSize = h * 0.9;
+        c.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+        let measure = c.measureText(text).width;
+        const maxW = width * 0.96;
+        if (measure > maxW) {
+          fontSize = fontSize * (maxW / measure);
+          c.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
         }
+        c.fillStyle = "white";
+        c.textAlign = "center";
+        c.textBaseline = "middle";
+        c.fillText(text, width / 2, h / 2);
+      });
+
+      // Icon sample (if iconPath provided). Lucide path data uses a 24×24
+      // viewBox — we scale & center it.
+      const iconPoints = iconPath
+        ? samplePositions((c) => {
+            const paths = Array.isArray(iconPath) ? iconPath : [iconPath];
+            const iconSize = h * 0.7; // smaller than word so morph is clearly different
+            const tx = width / 2 - iconSize / 2;
+            const ty = h / 2 - iconSize / 2;
+            c.save();
+            c.translate(tx, ty);
+            c.scale(iconSize / 24, iconSize / 24);
+            c.fillStyle = "white";
+            c.strokeStyle = "white";
+            c.lineWidth = 2;
+            c.lineJoin = "round";
+            c.lineCap = "round";
+            for (const d of paths) {
+              const p = new Path2D(d);
+              c.stroke(p);
+              c.fill(p);
+            }
+            c.restore();
+          })
+        : wordPoints;
+
+      // Pair points 1:1 — extend the smaller set by sampling extra points.
+      const total = Math.max(wordPoints.length, iconPoints.length);
+      const wp = (i: number) => wordPoints[i % wordPoints.length];
+      const ip = (i: number) => iconPoints[i % iconPoints.length];
+
+      const next: Particle[] = [];
+      for (let i = 0; i < total; i++) {
+        const w = wp(i);
+        const ic = ip(i);
+        const color = colors[i % colors.length];
+        next.push({
+          x: width / 2 + (Math.random() - 0.5) * width,
+          y: h + Math.random() * h,
+          wordX: w.x,
+          wordY: w.y,
+          iconX: ic.x,
+          iconY: ic.y,
+          vx: 0,
+          vy: 0,
+          color,
+          size: dotSize + Math.random() * 0.8,
+          phase: Math.random() * Math.PI * 2,
+        });
       }
       particles = next;
     };
@@ -124,7 +181,11 @@ export function PixelText({
       ctx.clearRect(0, 0, width, h);
 
       for (const p of particles) {
-        // Repulsion from cursor.
+        // Lerp target between icon (progress=0) and word (progress=1).
+        const tx = p.iconX + (p.wordX - p.iconX) * progress;
+        const ty = p.iconY + (p.wordY - p.iconY) * progress;
+
+        // Mouse repulsion.
         if (mouse.active) {
           const dx = p.x - mouse.x;
           const dy = p.y - mouse.y;
@@ -136,19 +197,16 @@ export function PixelText({
             p.vy += (dy / d) * force;
           }
         }
-        // Spring back to target.
-        p.vx += (p.tx - p.x) * 0.06;
-        p.vy += (p.ty - p.y) * 0.06;
-        // Damping.
+        // Spring toward (lerped) target.
+        p.vx += (tx - p.x) * 0.06;
+        p.vy += (ty - p.y) * 0.06;
         p.vx *= 0.84;
         p.vy *= 0.84;
-        // Update.
         p.x += p.vx;
         p.y += p.vy;
-        // Subtle idle shimmer.
+
         p.phase += 0.04;
         const alpha = 0.78 + 0.12 * Math.sin(p.phase);
-        // Draw.
         ctx.globalAlpha = alpha;
         ctx.fillStyle = p.color;
         ctx.beginPath();
@@ -180,20 +238,34 @@ export function PixelText({
         mouse.y <= h + repelR;
     };
 
+    // Visibility → progress. We want:
+    //   - When the section title is fully visible (centered-ish) → progress = 1 (word)
+    //   - When fully off-screen → progress = 0 (icon)
+    // We use intersectionRatio when partially visible, and check scroll
+    // position to handle the "fully out" case.
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          isInView = entry.isIntersecting;
-          if (isInView) start();
-          else stop();
+          // intersectionRatio is 0..1 — use it directly as progress.
+          progress = Math.max(progress, entry.intersectionRatio);
+          if (entry.isIntersecting) {
+            start();
+          } else {
+            // When out of view, animate to icon — easing handled inside tick.
+            progress = 0;
+            // Keep running briefly so the morph animates out before we stop.
+            setTimeout(() => {
+              if (!entry.isIntersecting) stop();
+            }, 800);
+          }
         }
       },
-      { threshold: 0.05 }
+      // Multiple thresholds so we get smooth progress updates as the title
+      // scrolls in/out.
+      { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0] }
     );
 
-    const onResize = () => {
-      init();
-    };
+    const onResize = () => init();
 
     init();
     observer.observe(canvas);
@@ -206,17 +278,14 @@ export function PixelText({
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("resize", onResize);
     };
-  }, [text, density, dotSize, palette, fontWeight]);
+  }, [text, iconPath, density, dotSize, palette, fontWeight]);
 
-  // Reduced-motion: render static heading instead.
+  // Reduced-motion: render a static heading instead of the animated canvas.
   if (hydrated && !motionEnabled) {
     return (
-      <div
-        className={`grid place-items-center ${className}`}
-        style={{ height }}
-      >
+      <div className={`grid place-items-center ${className}`} style={{ height }}>
         <span
-          className="text-text-glow font-black uppercase tracking-tight text-text-primary"
+          className="font-black uppercase tracking-tight text-text-primary text-glow"
           style={{ fontSize: `${Math.min(height * 0.6, 96)}px` }}
         >
           {text}

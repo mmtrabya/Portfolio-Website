@@ -15,7 +15,7 @@ export function Skills() {
 
   return (
     <Section id="skills" className="space-y-10">
-      <SectionPixelTitle text="SKILLS" palette="cyan" />
+      <SectionPixelTitle text="SKILLS" icon="code" palette="cyan" />
       <div className="space-y-3">
         <SectionLabel>Skills</SectionLabel>
         <h2>Technologies and expertise across systems, AI and DevOps</h2>

@@ -29,7 +29,7 @@ export function About() {
 
   return (
     <Section id="about" className="space-y-10">
-      <SectionPixelTitle text="ABOUT" palette="default" />
+      <SectionPixelTitle text="ABOUT" icon="user" palette="default" />
       <div className="space-y-3">
         <SectionLabel>About</SectionLabel>
         <h2>{ABOUT_HEADLINE}</h2>

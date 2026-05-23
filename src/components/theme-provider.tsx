@@ -98,8 +98,11 @@ export function useTheme() {
 }
 
 // Inline script that runs BEFORE React hydrates to apply the saved theme
-// and avoid a flash. Rendered into <head> via dangerouslySetInnerHTML, so the
-// React-19 "script tag inside component" warning is not triggered.
+// AND paint a full-screen boot overlay if this is the first session visit.
+// This eliminates the "site flashes for a moment, then boot screen overlays"
+// problem — instead the user sees black/boot immediately.
+// Rendered into <head> via dangerouslySetInnerHTML, so the React-19
+// "script tag inside component" warning is not triggered.
 export const THEME_BOOTSTRAP_SCRIPT = `
 (function(){try{
   var d=document.documentElement;
@@ -111,5 +114,29 @@ export const THEME_BOOTSTRAP_SCRIPT = `
   d.classList.remove('light','dark');
   d.classList.add(resolved);
   d.style.colorScheme=resolved;
+
+  // Pre-paint a solid black overlay on first visit so the site never flashes
+  // through before the React boot screen mounts. The overlay sits at z-index
+  // 50 — under the React BootScreen (z-100) but over everything else.
+  var seen=sessionStorage.getItem('boot-seen');
+  if(!seen){
+    d.classList.add('booting');
+    var s=document.createElement('style');
+    s.id='boot-pre-style';
+    s.textContent='#boot-pre{position:fixed;inset:0;z-index:50;background:var(--bg-main,#050507);}';
+    document.head.appendChild(s);
+    var addPre=function(){
+      if(document.body && !document.getElementById('boot-pre')){
+        var pre=document.createElement('div');
+        pre.id='boot-pre';
+        document.body.appendChild(pre);
+      }
+    };
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded',addPre);
+    }else{
+      addPre();
+    }
+  }
 }catch(e){}})();
 `;

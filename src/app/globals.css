@@ -5,53 +5,55 @@
 @layer base {
   :root {
     color-scheme: dark;
-    --bg-main: #0a0808;
-    --bg-secondary: #14100f;
-    --bg-elevated: rgba(255, 255, 255, 0.04);
+    --bg-main: #050507;
+    --bg-secondary: #0d0d12;
+    --bg-elevated: rgba(255, 255, 255, 0.05);
     --text-primary: #f4f1ed;
     --text-secondary: #94a3b8;
-    --text-on-accent: #0a0808;
-    --border-subtle: rgba(255, 255, 255, 0.08);
+    --text-on-accent: #050507;
+    --border-subtle: rgba(255, 255, 255, 0.09);
 
-    --accent-red: #ef4444;
-    --accent-gold: #fbbf24;
-    --accent-slate: #94a3b8;
+    /* Cyberpunk palette: saturated crimson + bright gold + electric cyan. */
+    --accent-red: #f43f5e;
+    --accent-gold: #fcd34d;
+    --accent-neon: #06fff0;
+    --accent-slate: #94a3b8; /* still used for muted accents */
 
-    /* Aliases kept so existing classes (text-accent-cyan etc.) still resolve.
-       This way we can change the palette later without renaming hundreds of refs. */
-    --accent-cyan: var(--accent-red);
+    /* Class-name aliases so we don't rename hundreds of refs. */
+    --accent-cyan: var(--accent-neon); /* "cyan" classes now read as electric cyan */
     --accent-emerald: var(--accent-gold);
-    --accent-amber: var(--accent-slate);
+    --accent-amber: var(--accent-red);
 
-    --cursor-glow: color-mix(in srgb, var(--accent-red) 32%, transparent);
+    --cursor-glow: color-mix(in srgb, var(--accent-neon) 38%, transparent);
     --glass-bg: rgba(255, 255, 255, 0.05);
-    --glow-1: rgba(239, 68, 68, 0.22);
-    --glow-2: rgba(251, 191, 36, 0.18);
-    --card-bg: rgba(20, 16, 15, 0.7);
+    --glow-1: rgba(244, 63, 94, 0.22);
+    --glow-2: rgba(252, 211, 77, 0.2);
+    --card-bg: rgba(13, 13, 18, 0.72);
   }
 
   .light {
     color-scheme: light;
-    --bg-main: #faf8f6;
+    --bg-main: #f7f6f9;
     --bg-secondary: #ffffff;
     --bg-elevated: rgba(0, 0, 0, 0.04);
-    --text-primary: #1a0d0d;
+    --text-primary: #0a0a0e;
     --text-secondary: #475569;
     --text-on-accent: #ffffff;
     --border-subtle: rgba(0, 0, 0, 0.12);
 
-    --accent-red: #dc2626;
+    --accent-red: #e11d48;
     --accent-gold: #d97706;
-    --accent-slate: #64748b;
+    --accent-neon: #0891b2;
+    --accent-slate: #475569;
 
-    --accent-cyan: var(--accent-red);
+    --accent-cyan: var(--accent-neon);
     --accent-emerald: var(--accent-gold);
-    --accent-amber: var(--accent-slate);
+    --accent-amber: var(--accent-red);
 
-    --cursor-glow: color-mix(in srgb, var(--accent-red) 18%, transparent);
+    --cursor-glow: color-mix(in srgb, var(--accent-neon) 22%, transparent);
     --glass-bg: rgba(255, 255, 255, 0.85);
-    --glow-1: rgba(220, 38, 38, 0.12);
-    --glow-2: rgba(217, 119, 6, 0.1);
+    --glow-1: rgba(225, 29, 72, 0.14);
+    --glow-2: rgba(217, 119, 6, 0.12);
     --card-bg: rgba(255, 255, 255, 0.92);
   }
 
@@ -65,35 +67,21 @@
     font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
   }
 
+  /* Fluid type — scales between mobile + ultra-wide. */
   h1 {
     color: var(--text-primary);
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.025em;
-  }
-  @media (min-width: 640px) {
-    h1 {
-      font-size: 2.5rem;
-    }
-  }
-  @media (min-width: 1024px) {
-    h1 {
-      font-size: 3.25rem;
-    }
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
   }
 
   h2 {
     color: var(--text-primary);
-    font-size: 1.6rem;
-    font-weight: 600;
-    line-height: 1.2;
+    font-size: clamp(1.5rem, 3.4vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.15;
     letter-spacing: -0.02em;
-  }
-  @media (min-width: 640px) {
-    h2 {
-      font-size: 2rem;
-    }
   }
 
   h3 {
@@ -102,8 +90,13 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--accent-red) 35%, transparent);
+    background: color-mix(in srgb, var(--accent-red) 40%, transparent);
     color: var(--text-primary);
+  }
+
+  /* Cap content readability on ultra-wide. */
+  body {
+    overflow-x: hidden;
   }
 }
 
@@ -130,12 +123,12 @@
   }
   .chip:hover {
     color: var(--text-primary);
-    border-color: var(--accent-red);
+    border-color: var(--accent-neon);
     transform: translateY(-1px);
   }
 
   .terminal-cursor {
-    background: var(--accent-gold);
+    background: var(--accent-neon);
     display: inline-block;
     width: 7px;
     height: 14px;
@@ -164,7 +157,8 @@
     background: linear-gradient(
       90deg,
       var(--accent-red),
-      var(--accent-gold)
+      var(--accent-gold),
+      var(--accent-neon)
     );
     transition: width 0.3s ease;
   }
@@ -172,14 +166,16 @@
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 24px color-mix(in srgb, var(--accent-red) 50%, transparent);
+    text-shadow:
+      0 0 24px color-mix(in srgb, var(--accent-neon) 50%, transparent),
+      0 0 48px color-mix(in srgb, var(--accent-red) 30%, transparent);
   }
   .bg-gradient-hero {
     background: linear-gradient(
       120deg,
-      color-mix(in srgb, var(--accent-red) 35%, transparent),
-      color-mix(in srgb, var(--accent-gold) 25%, transparent),
-      color-mix(in srgb, var(--accent-slate) 20%, transparent)
+      color-mix(in srgb, var(--accent-red) 40%, transparent),
+      color-mix(in srgb, var(--accent-gold) 26%, transparent),
+      color-mix(in srgb, var(--accent-neon) 30%, transparent)
     );
     background-size: 200% 200%;
   }
@@ -189,5 +185,13 @@
   .scrollbar-thin::-webkit-scrollbar-thumb {
     background: var(--border-subtle);
     border-radius: 3px;
+  }
+
+  /* Fluid container — scales nicely on tablet/desktop/4K alike. */
+  .container-fluid {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2.5rem);
+    max-width: min(1280px, 92vw);
   }
 }

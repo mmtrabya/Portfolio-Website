@@ -103,7 +103,7 @@ export function GithubActivity() {
 
   return (
     <Section id="github" className="space-y-10">
-      <SectionPixelTitle text="GITHUB" palette="emerald" />
+      <SectionPixelTitle text="GITHUB" icon="github" palette="emerald" />
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-3">
           <SectionLabel>GitHub Activity</SectionLabel>
