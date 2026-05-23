@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { About } from "@/components/about";
 import { BackToTop } from "@/components/back-to-top";
 import { BootScreen } from "@/components/boot-screen";
@@ -18,41 +18,52 @@ import { Testimonials } from "@/components/testimonials";
 
 const BOOT_KEY = "boot-seen";
 
-// Synchronously decide whether boot screen should show. We can read
-// sessionStorage in module scope on the client (it's a "use client" file),
-// but during SSR sessionStorage doesn't exist — so we default to "show boot"
-// on the server so the initial HTML covers the screen with the boot overlay.
-function initialShowBoot(): boolean {
-  if (typeof window === "undefined") return true; // SSR — render boot
-  try {
-    return !sessionStorage.getItem(BOOT_KEY);
-  } catch {
-    return false;
-  }
-}
-
 export default function Page() {
-  const [showBoot, setShowBoot] = useState<boolean>(initialShowBoot);
+  // We render nothing boot-related on SSR to keep server and client HTML in
+  // sync. The inline boot-pre script in <head> covers the screen with a solid
+  // black overlay on first visit until this effect decides what to do. For
+  // return visitors there's no overlay and no boot screen.
+  const [showBoot, setShowBoot] = useState(false);
   const [paletteOpen, setPaletteOpen] = useState(false);
 
   useEffect(() => {
-    // Once React owns the boot screen, remove the pre-paint overlay set by the
-    // theme-bootstrap script in <head>.
-    document.documentElement.classList.remove("booting");
-    const pre = document.getElementById("boot-pre");
-    if (pre) pre.remove();
-    const preStyle = document.getElementById("boot-pre-style");
-    if (preStyle) preStyle.remove();
+    let seen = false;
+    try {
+      seen = !!sessionStorage.getItem(BOOT_KEY);
+    } catch {
+      /* ignore */
+    }
+    if (!seen) {
+      // First visit — mount the React boot screen.
+      setShowBoot(true);
+    } else {
+      // Return visit — remove the pre-paint overlay immediately.
+      document.documentElement.classList.remove("booting");
+      document.getElementById("boot-pre")?.remove();
+      document.getElementById("boot-pre-style")?.remove();
+    }
   }, []);
 
-  const finishBoot = () => {
+  // When React's BootScreen mounts, remove the pre-paint overlay so it
+  // doesn't double-cover. Runs once boot is showing.
+  useEffect(() => {
+    if (showBoot) {
+      document.documentElement.classList.remove("booting");
+      document.getElementById("boot-pre")?.remove();
+      document.getElementById("boot-pre-style")?.remove();
+    }
+  }, [showBoot]);
+
+  // Stable reference so BootScreen's animation timers don't reset on
+  // every Page re-render.
+  const finishBoot = useCallback(() => {
     try {
       sessionStorage.setItem(BOOT_KEY, "1");
     } catch {
-      // sessionStorage may be unavailable (e.g. privacy mode)
+      /* ignore */
     }
     setShowBoot(false);
-  };
+  }, []);
 
   return (
     <>
